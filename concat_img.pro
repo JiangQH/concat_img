@@ -24,8 +24,11 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += main.cpp\
-        imageconcat.cpp
+        imageconcat.cpp \
+    resmanager.cpp
 
-HEADERS  += imageconcat.h
+HEADERS  += imageconcat.h \
+    resmanager.h \
+    ../../../Downloads/CImg-1.7.9/CImg.h
 
 FORMS    += imageconcat.ui

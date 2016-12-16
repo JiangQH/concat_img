@@ -15,8 +15,20 @@ public:
     explicit ImageConcat(QWidget *parent = 0);
     ~ImageConcat();
 
+
+private slots:
+    void onBrowseFiles();
+
+    void onSaveData();
+
+    void onCheckStateChanged(int arg1);
+
+
 private:
     Ui::ImageConcat *ui;
+
+    // to connect the signal and slots
+    void connectSignalAndSlots();
 };
 
 #endif // IMAGECONCAT_H
