@@ -2,7 +2,8 @@
 #define IMAGECONCAT_H
 
 #include <QWidget>
-
+#include <QCheckBox>
+#include <vector>
 namespace Ui {
 class ImageConcat;
 }
@@ -23,12 +24,17 @@ private slots:
 
     void onCheckStateChanged(int arg1);
 
+    void onCheckStateChanged(int arg1);
+
 
 private:
     Ui::ImageConcat *ui;
+    std::vector<QCheckBox*> _check_group;// the check box in check group
 
     // to connect the signal and slots
     void connectSignalAndSlots();
+    // create the check group
+    void createCheckGroup(int count);
 };
 
 #endif // IMAGECONCAT_H

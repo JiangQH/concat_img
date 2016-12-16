@@ -30,6 +30,7 @@ bool ResManager::loadLayers(string path) {
         return false;
     }
     // else read the data in it
+    _layer_imgs.clear();
     _layer_path = path;
     for (auto name: contents) {
         string full_name = path + "/" + name;
@@ -39,6 +40,11 @@ bool ResManager::loadLayers(string path) {
     return true;
 }
 
+int ResManager::getLayerCount() {
+    return _layer_imgs.size();
+}
+
+
 void ResManager::readDirs(string path,
                           vector<string>& contents) {
     DIR *dir = opendir(path.c_str());
@@ -47,12 +53,15 @@ void ResManager::readDirs(string path,
     while (entry != NULL) {
         string name = string(entry->d_name);
         if (name.size() < 3) {
+            entry = readdir(dir);
             continue;
         }
         if (name.substr(name.size()-3) == "png") {
             contents.push_back(name);
         }
+        entry = readdir(dir);
     }
+    closedir(dir);
 }
 
 

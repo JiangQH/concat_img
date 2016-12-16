@@ -27,6 +27,8 @@ public:
 
     // load the resource
     bool loadLayers(std::string path);
+    // get layer count
+    int getLayerCount();
 };// end of resmanager
 }// end of namespace
 #endif // RESMANAGER_H
