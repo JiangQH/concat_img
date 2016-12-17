@@ -1,11 +1,13 @@
-#include "imageconcat.h"
+#include "uimainwindow.h"
+#include "ui_manager.h"
 #include <QApplication>
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    ImageConcat w;
-    w.show();
+    jqh::UiManager::getInstance()->run();
+    //UIMainWindow w;
+    //w.show();
 
     return a.exec();
 }
