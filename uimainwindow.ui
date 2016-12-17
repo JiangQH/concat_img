@@ -30,7 +30,23 @@
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>
-     <widget class="QGraphicsView" name="imgDisplay"/>
+     <widget class="QLabel" name="Display">
+      <property name="minimumSize">
+       <size>
+        <width>800</width>
+        <height>400</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>800</width>
+        <height>600</height>
+       </size>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
      <widget class="QGroupBox" name="checkGroup">
       <property name="title">
        <string>Options</string>

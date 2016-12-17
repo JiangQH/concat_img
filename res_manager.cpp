@@ -3,6 +3,7 @@
 #include <dirent.h>
 #include <vector>
 #include <string>
+#include <iostream>
 namespace jqh {
 using namespace std;
 using namespace cv;
@@ -38,14 +39,13 @@ void ResManager::readDirs(string path, vector<string>& contents) {
 }
 
 bool ResManager::loadLayers(string path) {
+        resetAll();
         // read the contents in path
         vector<string> contents;
         readDirs(path, contents);
         if (contents.empty()) {
             return false;
         }
-        // else read the data in it
-        _layer_imgs.clear();
         _layer_path = path;
         for (auto name: contents) {
             string full_name = path + "/" + name;
@@ -54,6 +54,42 @@ bool ResManager::loadLayers(string path) {
         }
         return true;
 }
+
+void ResManager::updateCurrentImg(int id, Option op) {
+    switch (op) {
+    case add:
+        if (_current_img.empty()) {
+            _current_img = (_layer_imgs[id]).clone();
+        }
+        else {
+            _current_img += _layer_imgs[id];
+        }
+        break;
+    case sub:
+        _current_img -= _layer_imgs[id];
+        break;
+    default:
+        break;
+    }
+}
+
+const cv::Mat& ResManager::getCurrentImg() const{
+    return _current_img;
+}
+
+void ResManager::saveCurrentImg(int saveid) {
+    string save_name = _layer_path + "/cut_" +
+            std::to_string(saveid) + ".jpg";
+    cout << save_name << endl;
+    imwrite(save_name, _current_img);
+
+}
+
+void ResManager::resetAll() {
+    _layer_imgs.clear();
+    _current_img.release();
+}
+
 
 
 

@@ -10,13 +10,17 @@ namespace jqh {
 
 UiManager::UiManager()
 {
-    // nothing here
     _vbox_layout = new QVBoxLayout;
+    _clicked = 0;
+   // updateUi();
 }
 
 UiManager::~UiManager() {
     // currently nothing
-
+    delete _vbox_layout;
+    for (auto item: _check_group) {
+        delete item;
+    }
 }
 
 UiManager* UiManager::getInstance() {
@@ -30,24 +34,29 @@ void UiManager::run() {
 
 void UiManager::receiveSignal(Signal s) {
     // receive the signal, judge who send?
-
     switch (s._sender) {
     case browse:
-        std::cout << "browse clicked" << std::endl;
+        //std::cout << "browse clicked" << std::endl;
         // browseFiles
         browseFile();
-        // update the checkbox
-        updateCheckBox();
+        // update the UI
+        updateUi();
         break;
     case save:
         //do something
+        _clicked += 1;
+        ResManager::getInstance()->saveCurrentImg(_clicked);
         break;
     case checked:
         // check first
-        std::cout << "checked" << s._id << std::endl;
+        ResManager::getInstance()->updateCurrentImg(s._id, add);
+        updateImgView();
+        //std::cout << "checked" << s._id << std::endl;
         break;
     case unchecked:
-        std::cout << "unchecked" << s._id << std::endl;
+        ResManager::getInstance()->updateCurrentImg(s._id, sub);
+        updateImgView();
+        //std::cout << "unchecked" << s._id << std::endl;
         break;
 
     }
@@ -78,5 +87,24 @@ void UiManager::updateCheckBox() {
     // set the layout in mainwindow
     _main_window.setGropubox(_vbox_layout);
 }
+
+void UiManager::resetAll() {
+    while (auto item = _vbox_layout->takeAt(0)) {
+        delete item;
+    }
+    _check_group.clear();
+    _clicked = 0;
+}
+
+ void UiManager::updateUi() {
+    resetAll();
+    updateCheckBox();
+    updateImgView();
+ }
+
+ void UiManager::updateImgView() {
+    _main_window.updateImgView(ResManager::getInstance()->getCurrentImg());
+ }
+
 
 }// end of namespace

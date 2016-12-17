@@ -33,10 +33,13 @@ private:
     UIMainWindow _main_window;
     std::vector<UIImgCheck*> _check_group;
     QVBoxLayout *_vbox_layout;
-
+    int _clicked;
 
     void browseFile();
+    void updateUi();
     void updateCheckBox();
+    void updateImgView();
+    void resetAll();
 };// end of class
 
 }// end of namespace
