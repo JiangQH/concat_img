@@ -1,13 +1,15 @@
 #include "ui_manager.h"
 #include "res_manager.h"
 #include <iostream>
+#include <string>
 #include <QFileDialog>
 #include <QString>
 #include <QGroupBox>
 #include <QVBoxLayout>
+#include <QMessageBox>
 namespace jqh {
 
-
+using namespace std;
 UiManager::UiManager()
 {
     _vbox_layout = new QVBoxLayout;
@@ -36,43 +38,55 @@ void UiManager::receiveSignal(Signal s) {
     // receive the signal, judge who send?
     switch (s._sender) {
     case browse:
+    {
         //std::cout << "browse clicked" << std::endl;
         // browseFiles
-        browseFile();
-        // update the UI
-        updateUi();
+        if(browseFile()) {
+            updateUi();
+        }
+        else {
+            message("load layer folder failed");
+        }
+    }
         break;
+
     case save:
+    {
         //do something
         _clicked += 1;
-        ResManager::getInstance()->saveCurrentImg(_clicked);
+        string msg = ResManager::getInstance()->saveCurrentImg(_clicked);
+        message(msg);
+    }
         break;
+
     case checked:
+    {
         // check first
         ResManager::getInstance()->updateCurrentImg(s._id, add);
         updateImgView();
         //std::cout << "checked" << s._id << std::endl;
+    }
         break;
+
     case unchecked:
+    {
         ResManager::getInstance()->updateCurrentImg(s._id, sub);
         updateImgView();
         //std::cout << "unchecked" << s._id << std::endl;
+    }
         break;
 
     }
 }
 
-void UiManager::browseFile() {
+bool UiManager::browseFile() {
     // browse the folder
     QString path = QFileDialog::getExistingDirectory(&_main_window, "Open the depth layer folder", QString(),
                                                          QFileDialog::ShowDirsOnly);
-    if (!path.isEmpty()) {
-        // load layers
-        if (!ResManager::getInstance()->loadLayers(path.toStdString())) {
-            // load failed
-            std::cout << "load file failed" << std::endl;
-        }
+    if (path.isEmpty()) {
+        return false;
     }
+    return ResManager::getInstance()->loadLayers(path.toStdString());
 }
 
 void UiManager::updateCheckBox() {
@@ -106,5 +120,11 @@ void UiManager::resetAll() {
     _main_window.updateImgView(ResManager::getInstance()->getCurrentImg());
  }
 
+ void UiManager::message(std::string info) {
+    info = "<p align='center'>" + info + "</p>";
+    QMessageBox::information(&_main_window,
+                             QString(""),
+                             QString::fromStdString(info));
+ }
 
 }// end of namespace

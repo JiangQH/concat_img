@@ -77,19 +77,19 @@ const cv::Mat& ResManager::getCurrentImg() const{
     return _current_img;
 }
 
-void ResManager::saveCurrentImg(int saveid) {
+std::string ResManager::saveCurrentImg(int saveid) {
     string save_name = _layer_path + "/cut_" +
             std::to_string(saveid) + ".jpg";
-    cout << save_name << endl;
+   // cout << save_name << endl;
     imwrite(save_name, _current_img);
-
+    string msg = "saved as cut_";
+    return msg + std::to_string(saveid)+".jpg";
 }
 
 void ResManager::resetAll() {
     _layer_imgs.clear();
     _current_img.release();
 }
-
 
 
 

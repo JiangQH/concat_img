@@ -35,11 +35,12 @@ private:
     QVBoxLayout *_vbox_layout;
     int _clicked;
 
-    void browseFile();
+    bool browseFile();
     void updateUi();
     void updateCheckBox();
     void updateImgView();
     void resetAll();
+    void message(std::string info);
 };// end of class
 
 }// end of namespace

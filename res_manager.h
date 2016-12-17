@@ -22,7 +22,7 @@ public:
     }
     void updateCurrentImg(int id, Option op);
     const cv::Mat& getCurrentImg() const;
-    void saveCurrentImg(int saveid);
+    std::string saveCurrentImg(int saveid);
 private:
     ResManager(); // make it not possible to access through declare
     std::vector<cv::Mat> _layer_imgs;
