@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'uimainwindow.ui'
 **
-** Created by: Qt User Interface Compiler version 5.5.1
+** Created by: Qt User Interface Compiler version 5.7.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -45,9 +45,16 @@ public:
     {
         if (UIMainWindow->objectName().isEmpty())
             UIMainWindow->setObjectName(QStringLiteral("UIMainWindow"));
-        UIMainWindow->resize(961, 577);
+        UIMainWindow->resize(974, 577);
+        QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(UIMainWindow->sizePolicy().hasHeightForWidth());
+        UIMainWindow->setSizePolicy(sizePolicy);
         centralWidget = new QWidget(UIMainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
+        sizePolicy.setHeightForWidth(centralWidget->sizePolicy().hasHeightForWidth());
+        centralWidget->setSizePolicy(sizePolicy);
         splitter = new QSplitter(centralWidget);
         splitter->setObjectName(QStringLiteral("splitter"));
         splitter->setGeometry(QRect(20, 0, 931, 511));
@@ -77,7 +84,7 @@ public:
         UIMainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(UIMainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 961, 19));
+        menuBar->setGeometry(QRect(0, 0, 974, 19));
         UIMainWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(UIMainWindow);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
@@ -93,11 +100,11 @@ public:
 
     void retranslateUi(QMainWindow *UIMainWindow)
     {
-        UIMainWindow->setWindowTitle(QApplication::translate("UIMainWindow", "ImageConcat", 0));
+        UIMainWindow->setWindowTitle(QApplication::translate("UIMainWindow", "ImageConcat", Q_NULLPTR));
         Display->setText(QString());
-        checkGroup->setTitle(QApplication::translate("UIMainWindow", "Options", 0));
-        browseButton->setText(QApplication::translate("UIMainWindow", "Browse", 0));
-        saveButton->setText(QApplication::translate("UIMainWindow", "Save", 0));
+        checkGroup->setTitle(QApplication::translate("UIMainWindow", "Options", Q_NULLPTR));
+        browseButton->setText(QApplication::translate("UIMainWindow", "Browse", Q_NULLPTR));
+        saveButton->setText(QApplication::translate("UIMainWindow", "Save", Q_NULLPTR));
     } // retranslateUi
 
 };

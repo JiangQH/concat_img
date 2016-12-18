@@ -23,7 +23,7 @@ public:
     }
     void updateCurrentImg(int id, Option op);
     const cv::Mat& getCurrentImg() const;
-    std::string saveCurrentImg(int saveid);
+    std::string saveCurrentImg();
     void resetAll();
 private:
     ResManager(); // make it not possible to access through declare
@@ -31,9 +31,10 @@ private:
     std::string _layer_path;
     cv::Mat _current_img;
     std::set<int> _merge_id;
+    int _saved_count;
     void mergeImg();
     void readDirs(std::string, std::vector<std::string>&);
-
+    bool exist(std::string filename);
 };// end of class
 }// end of namespace
 #endif // RES_MANAGER_H

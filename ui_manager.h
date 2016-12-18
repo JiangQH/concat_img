@@ -33,7 +33,6 @@ private:
     UIMainWindow _main_window;
     std::vector<UIImgCheck*> _check_group;
     QVBoxLayout *_vbox_layout;
-    int _clicked;
 
     bool browseFile();
     void updateUi();

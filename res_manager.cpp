@@ -1,9 +1,11 @@
 #include "res_manager.h"
 #include <stdio.h>
 #include <dirent.h>
+#include <sys/stat.h>
 #include <vector>
 #include <string>
 #include <iostream>
+#include <fstream>
 namespace jqh {
 using namespace std;
 using namespace cv;
@@ -40,6 +42,10 @@ void ResManager::readDirs(string path, vector<string>& contents) {
 
 bool ResManager::loadLayers(string path) {
         // read the contents in path
+        string flag = path + "/flags";
+        if (exist(flag)) {
+            return false;
+        }
         vector<string> contents;
         readDirs(path, contents);
         if (contents.empty()) {
@@ -73,21 +79,36 @@ const cv::Mat& ResManager::getCurrentImg() const{
     return _current_img;
 }
 
-std::string ResManager::saveCurrentImg(int saveid) {
-    string save_name = _layer_path + "/cut_" +
-            std::to_string(saveid) + ".jpg";
+std::string ResManager::saveCurrentImg() {
    // cout << save_name << endl;
+    // should we save?
+    if (_current_img.empty()) {
+        return "empty";
+    }
+    string save_name = _layer_path + "/cut_" +
+            std::to_string(_saved_count) + ".jpg";
     imwrite(save_name, _current_img);
     string msg = "saved as cut_";
-    return msg + std::to_string(saveid)+".jpg";
     // save a flag too
+    string flag = _layer_path + "/flags";
+    if (!exist(flag)) {
+        std::ofstream a(flag);
+        a << "flag";
+        a.close();
+    }
+    return msg + std::to_string(_saved_count)+".jpg";
+}
 
+bool ResManager::exist(string filename) {
+    struct stat buffer;
+    return (stat(filename.c_str(), &buffer) == 0);
 }
 
 void ResManager::resetAll() {
     _layer_imgs.clear();
     _current_img.release();
     _merge_id.clear();
+    _saved_count = 0;
 }
 
 void ResManager::mergeImg() {

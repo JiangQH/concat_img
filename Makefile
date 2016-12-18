@@ -33,7 +33,7 @@ MOVE          = mv -f
 TAR           = tar -cf
 COMPRESS      = gzip -9f
 DISTNAME      = ImageConcat1.0.0
-DISTDIR = /home/jqh/project/ImageConcat/.tmp/ImageConcat1.0.0
+DISTDIR = /home/jqh/project/concat_img/.tmp/ImageConcat1.0.0
 LINK          = g++
 LFLAGS        = -Wl,-O1 -Wl,-rpath,/opt/Qt5.7.1/5.7/gcc_64/lib
 LIBS          = $(SUBLIBS) -L/usr/local/lib -lopencv_core -lopencv_imgproc -lopencv_highgui -lopencv_ml -lopencv_video -lopencv_features2d -lopencv_calib3d -lopencv_objdetect -lopencv_contrib -lopencv_legacy -lopencv_flann -lopencv_nonfree -L/opt/Qt5.7.1/5.7/gcc_64/lib -lQt5Widgets -L/usr/lib64 -lQt5Gui -lQt5Core -lGL -lpthread 
@@ -192,7 +192,6 @@ DIST          = /opt/Qt5.7.1/5.7/gcc_64/mkspecs/features/spec_pre.prf \
 		/opt/Qt5.7.1/5.7/gcc_64/mkspecs/features/qt_config.prf \
 		/opt/Qt5.7.1/5.7/gcc_64/mkspecs/linux-g++/qmake.conf \
 		/opt/Qt5.7.1/5.7/gcc_64/mkspecs/features/spec_post.prf \
-		.qmake.stash \
 		/opt/Qt5.7.1/5.7/gcc_64/mkspecs/features/exclusive_builds.prf \
 		/opt/Qt5.7.1/5.7/gcc_64/mkspecs/features/toolchain.prf \
 		/opt/Qt5.7.1/5.7/gcc_64/mkspecs/features/default_pre.prf \
@@ -360,7 +359,6 @@ Makefile: ImageConcat.pro /opt/Qt5.7.1/5.7/gcc_64/mkspecs/linux-g++/qmake.conf /
 		/opt/Qt5.7.1/5.7/gcc_64/mkspecs/features/qt_config.prf \
 		/opt/Qt5.7.1/5.7/gcc_64/mkspecs/linux-g++/qmake.conf \
 		/opt/Qt5.7.1/5.7/gcc_64/mkspecs/features/spec_post.prf \
-		.qmake.stash \
 		/opt/Qt5.7.1/5.7/gcc_64/mkspecs/features/exclusive_builds.prf \
 		/opt/Qt5.7.1/5.7/gcc_64/mkspecs/features/toolchain.prf \
 		/opt/Qt5.7.1/5.7/gcc_64/mkspecs/features/default_pre.prf \
@@ -514,7 +512,6 @@ Makefile: ImageConcat.pro /opt/Qt5.7.1/5.7/gcc_64/mkspecs/linux-g++/qmake.conf /
 /opt/Qt5.7.1/5.7/gcc_64/mkspecs/features/qt_config.prf:
 /opt/Qt5.7.1/5.7/gcc_64/mkspecs/linux-g++/qmake.conf:
 /opt/Qt5.7.1/5.7/gcc_64/mkspecs/features/spec_post.prf:
-.qmake.stash:
 /opt/Qt5.7.1/5.7/gcc_64/mkspecs/features/exclusive_builds.prf:
 /opt/Qt5.7.1/5.7/gcc_64/mkspecs/features/toolchain.prf:
 /opt/Qt5.7.1/5.7/gcc_64/mkspecs/features/default_pre.prf:
@@ -688,7 +685,7 @@ moc_uimainwindow.cpp: /opt/Qt5.7.1/5.7/gcc_64/include/QtWidgets/QMainWindow \
 		/opt/Qt5.7.1/5.7/gcc_64/include/QtWidgets/qgridlayout.h \
 		uimainwindow.h \
 		/opt/Qt5.7.1/5.7/gcc_64/bin/moc
-	/opt/Qt5.7.1/5.7/gcc_64/bin/moc $(DEFINES) -I/opt/Qt5.7.1/5.7/gcc_64/mkspecs/linux-g++ -I/home/jqh/project/ImageConcat -I/usr/local/include/opencv2 -I/opt/Qt5.7.1/5.7/gcc_64/include -I/opt/Qt5.7.1/5.7/gcc_64/include/QtWidgets -I/opt/Qt5.7.1/5.7/gcc_64/include/QtGui -I/opt/Qt5.7.1/5.7/gcc_64/include/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include uimainwindow.h -o moc_uimainwindow.cpp
+	/opt/Qt5.7.1/5.7/gcc_64/bin/moc $(DEFINES) -I/opt/Qt5.7.1/5.7/gcc_64/mkspecs/linux-g++ -I/home/jqh/project/concat_img -I/usr/local/include/opencv2 -I/opt/Qt5.7.1/5.7/gcc_64/include -I/opt/Qt5.7.1/5.7/gcc_64/include/QtWidgets -I/opt/Qt5.7.1/5.7/gcc_64/include/QtGui -I/opt/Qt5.7.1/5.7/gcc_64/include/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include uimainwindow.h -o moc_uimainwindow.cpp
 
 moc_uiimgcheck.cpp: /opt/Qt5.7.1/5.7/gcc_64/include/QtCore/QObject \
 		/opt/Qt5.7.1/5.7/gcc_64/include/QtCore/qobject.h \
@@ -793,7 +790,7 @@ moc_uiimgcheck.cpp: /opt/Qt5.7.1/5.7/gcc_64/include/QtCore/QObject \
 		/opt/Qt5.7.1/5.7/gcc_64/include/QtGui/qtouchdevice.h \
 		uiimgcheck.h \
 		/opt/Qt5.7.1/5.7/gcc_64/bin/moc
-	/opt/Qt5.7.1/5.7/gcc_64/bin/moc $(DEFINES) -I/opt/Qt5.7.1/5.7/gcc_64/mkspecs/linux-g++ -I/home/jqh/project/ImageConcat -I/usr/local/include/opencv2 -I/opt/Qt5.7.1/5.7/gcc_64/include -I/opt/Qt5.7.1/5.7/gcc_64/include/QtWidgets -I/opt/Qt5.7.1/5.7/gcc_64/include/QtGui -I/opt/Qt5.7.1/5.7/gcc_64/include/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include uiimgcheck.h -o moc_uiimgcheck.cpp
+	/opt/Qt5.7.1/5.7/gcc_64/bin/moc $(DEFINES) -I/opt/Qt5.7.1/5.7/gcc_64/mkspecs/linux-g++ -I/home/jqh/project/concat_img -I/usr/local/include/opencv2 -I/opt/Qt5.7.1/5.7/gcc_64/include -I/opt/Qt5.7.1/5.7/gcc_64/include/QtWidgets -I/opt/Qt5.7.1/5.7/gcc_64/include/QtGui -I/opt/Qt5.7.1/5.7/gcc_64/include/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include uiimgcheck.h -o moc_uiimgcheck.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:

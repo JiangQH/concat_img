@@ -13,7 +13,7 @@ using namespace std;
 UiManager::UiManager()
 {
     _vbox_layout = new QVBoxLayout;
-    _clicked = 0;
+    _main_window.setFixedSize(980, 550);
    // updateUi();
 }
 
@@ -42,7 +42,7 @@ void UiManager::receiveSignal(Signal s) {
         //std::cout << "browse clicked" << std::endl;
         // browseFiles
         if(!browseFile()) {
-            message("load layer folder failed");
+            message("empty or has been handled");
         }
         updateUi();
     }
@@ -51,8 +51,7 @@ void UiManager::receiveSignal(Signal s) {
     case save:
     {
         //do something
-        _clicked += 1;
-        string msg = ResManager::getInstance()->saveCurrentImg(_clicked);
+        string msg = ResManager::getInstance()->saveCurrentImg();
         message(msg);
     }
         break;
@@ -105,7 +104,6 @@ void UiManager::updateCheckBox() {
 void UiManager::resetAll() {
     clc(_vbox_layout);
     _check_group.clear();
-    _clicked = 0;
 }
 
 void UiManager::clc(QLayout* layout)
