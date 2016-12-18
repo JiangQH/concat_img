@@ -41,6 +41,7 @@ private:
     void updateImgView();
     void resetAll();
     void message(std::string info);
+    void clc(QLayout* layout);
 };// end of class
 
 }// end of namespace

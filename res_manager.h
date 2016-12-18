@@ -2,6 +2,7 @@
 #define RES_MANAGER_H
 #include <vector>
 #include <string>
+#include <set>
 #include "opencv2/imgproc/imgproc.hpp"
 #include "opencv2/core/core.hpp"
 #include "opencv2/highgui/highgui.hpp"
@@ -23,13 +24,14 @@ public:
     void updateCurrentImg(int id, Option op);
     const cv::Mat& getCurrentImg() const;
     std::string saveCurrentImg(int saveid);
+    void resetAll();
 private:
     ResManager(); // make it not possible to access through declare
     std::vector<cv::Mat> _layer_imgs;
     std::string _layer_path;
     cv::Mat _current_img;
-    void resetAll();
-
+    std::set<int> _merge_id;
+    void mergeImg();
     void readDirs(std::string, std::vector<std::string>&);
 
 };// end of class

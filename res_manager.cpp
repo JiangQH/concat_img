@@ -39,7 +39,6 @@ void ResManager::readDirs(string path, vector<string>& contents) {
 }
 
 bool ResManager::loadLayers(string path) {
-        resetAll();
         // read the contents in path
         vector<string> contents;
         readDirs(path, contents);
@@ -58,15 +57,12 @@ bool ResManager::loadLayers(string path) {
 void ResManager::updateCurrentImg(int id, Option op) {
     switch (op) {
     case add:
-        if (_current_img.empty()) {
-            _current_img = (_layer_imgs[id]).clone();
-        }
-        else {
-            _current_img += _layer_imgs[id];
-        }
+        _merge_id.insert(id);
+        mergeImg();
         break;
     case sub:
-        _current_img -= _layer_imgs[id];
+        _merge_id.erase(id);
+        mergeImg();
         break;
     default:
         break;
@@ -84,11 +80,26 @@ std::string ResManager::saveCurrentImg(int saveid) {
     imwrite(save_name, _current_img);
     string msg = "saved as cut_";
     return msg + std::to_string(saveid)+".jpg";
+    // save a flag too
+
 }
 
 void ResManager::resetAll() {
     _layer_imgs.clear();
     _current_img.release();
+    _merge_id.clear();
+}
+
+void ResManager::mergeImg() {
+    _current_img.release();
+    for(auto it = _merge_id.begin(); it != _merge_id.end() ; ++it) {
+        if (it == _merge_id.begin() &&_current_img.empty()) {
+            _current_img = (_layer_imgs[*it]).clone();
+        }
+        else {
+            _current_img += _layer_imgs[*it];
+        }
+    }
 }
 
 

@@ -41,12 +41,10 @@ void UiManager::receiveSignal(Signal s) {
     {
         //std::cout << "browse clicked" << std::endl;
         // browseFiles
-        if(browseFile()) {
-            updateUi();
-        }
-        else {
+        if(!browseFile()) {
             message("load layer folder failed");
         }
+        updateUi();
     }
         break;
 
@@ -80,6 +78,8 @@ void UiManager::receiveSignal(Signal s) {
 }
 
 bool UiManager::browseFile() {
+    // clear all the resource in res,no mater it success or not
+    ResManager::getInstance()->resetAll();
     // browse the folder
     QString path = QFileDialog::getExistingDirectory(&_main_window, "Open the depth layer folder", QString(),
                                                          QFileDialog::ShowDirsOnly);
@@ -103,11 +103,28 @@ void UiManager::updateCheckBox() {
 }
 
 void UiManager::resetAll() {
-    while (auto item = _vbox_layout->takeAt(0)) {
-        delete item;
-    }
+    clc(_vbox_layout);
     _check_group.clear();
     _clicked = 0;
+}
+
+void UiManager::clc(QLayout* layout)
+{
+    QLayoutItem* child;
+    while(layout->count()!=0)
+    {
+        child = layout->takeAt(0);
+        if(child->layout() != 0)
+        {
+            clc(child->layout());
+        }
+        else if(child->widget() != 0)
+        {
+            delete child->widget();
+        }
+
+        delete child;
+    }
 }
 
  void UiManager::updateUi() {
